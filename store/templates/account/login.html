@@ -1,0 +1,32 @@
+{% extends "store/base.html" %}
+{% load site_conf %}
+
+{% block content %}
+<div class="ui middle aligned center aligned grid">
+    <div class="eight wide column">
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="mail icon"></i>
+                        <input type="text" name="email" placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" placeholder="Wachtwoord">
+                    </div>
+                </div>
+                <div class="ui fluid large {% PRIMARY_COLOR %} submit button">Login</div>
+            </div>
+        
+            <div class="ui error message"></div>
+        </form>
+    
+        <div class="ui message">
+            Nog geen account? <a href="./register">Account maken</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

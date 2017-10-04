@@ -2,55 +2,53 @@
 {% load site_conf %}
 
 <div class="ui borderless fixed main menu">
-    <!--<div class="ui text container">-->
-        <a href="/" class="header item">
-            <img class="logo" src="{% static 'store/logo.png' %}">
-        </a>
-        <a href="#" class="ui floated dropdown item">
-            Producten 
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <div class="item">
-                    Kaarten
-                </div>      
-                <div class="item">
-                    Posters
-                </div>
+    <a href="/" class="header item">
+        <img class="logo" src="{% static 'store/logo.png' %}">
+    </a>
+    <a href="#" class="ui floated dropdown item">
+        Products 
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <div class="item">
+                Cards
+            </div>      
+            <div class="item">
+                Posters
             </div>
-        </a>
-
-        {% if IsLoggedIn %}
-        <a href="#" class="ui right floated dropdown item">
-            Gebruiker 
-            <i class="dropdown icon"></i>
-            <div class="menu">
-                <div class="item">
-                    <i class="shop icon"></i>                  
-                    Winkelwagen
-                </div>      
-                <div class="item">
-                    <i class="user icon"></i>
-                    Accountoverzicht
-                </div>
-                <div class="item">
-                    <i class="payment icon"></i>                         
-                    Mijn bestellingen
-                </div>
-                <div class="item">
-                    <i class="sign out icon"></i> 
-                    Uitloggen
-                </div>
-            </div>
-        </a>
-        {% else %}
-        <div class="right menu">
-            <a class="item" href="/account/register">
-                <div class="ui {% PRIMARY_COLOR %} button">Sign up</div>
-            </a>
-            <a class="item" href="/account/login">
-                <div class="ui button">Log-in</div>
-            </a>
         </div>
-        {% endif %}
-    <!--</div>-->
+    </a>
+
+    {% if IsLoggedIn %}
+    <a href="#" class="ui right floated dropdown item">
+        Welcome, {{ Fullname }}
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <div class="item">
+                <i class="shop icon"></i>                  
+                Winkelwagen
+            </div>
+            <div class="item">
+                <i class="user icon"></i>
+                Account overview
+            </div>
+            <div class="item">
+                <i class="payment icon"></i>                         
+                Mijn bestellingen
+            </div>
+            <div class="item">
+                <i class="sign out icon"></i> 
+                Uitloggen
+            </div>
+        </div>
+    </a>
+    {% else %}
+    <div class="right menu">
+        <a class="item" href="/account/register">
+            <div class="ui {% PRIMARY_COLOR %} button">Sign up</div>
+        </a>
+        <a class="item" href="/account/login">
+            <div class="ui button">Log-in</div>
+        </a>
+    </div>
+    {% endif %}
 </div>

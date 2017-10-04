@@ -2,7 +2,7 @@
 {% load site_conf %}
 
 <div class="ui borderless fixed main menu">
-    <div class="ui text container">
+    <!--<div class="ui text container">-->
         <a href="/" class="header item">
             <img class="logo" src="{% static 'store/logo.png' %}">
         </a>
@@ -19,6 +19,7 @@
             </div>
         </a>
 
+        {% if IsLoggedIn %}
         <a href="#" class="ui right floated dropdown item">
             Gebruiker 
             <i class="dropdown icon"></i>
@@ -41,5 +42,15 @@
                 </div>
             </div>
         </a>
-    </div>
+        {% else %}
+        <div class="right menu">
+            <a class="item" href="/account/register">
+                <div class="ui {% PRIMARY_COLOR %} button">Sign up</div>
+            </a>
+            <a class="item" href="/account/login">
+                <div class="ui button">Log-in</div>
+            </a>
+        </div>
+        {% endif %}
+    <!--</div>-->
 </div>

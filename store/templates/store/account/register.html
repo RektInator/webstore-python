@@ -4,15 +4,22 @@
 {% block content %}
 <div class="ui middle aligned center aligned grid">
     <div class="eight wide column">
-        <form class="ui large form">
+        {% if error %}
+        <div class="ui error message">{{ description }}</div>
+        {% elseif succeeded %}
+        <div class="ui success message">{{ description }}</div>        
+        {% endif %}
+
+        <form class="ui large form" method="POST" action="#">
+            {% csrf_token %}
             <div class="ui stacked segment">
 
-                <h4 class="ui dividing header">Accountgegevens</h4>                    
+                <h4 class="ui dividing header">Account Details</h4>                    
 
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="email" placeholder="Naam">
+                        <input type="text" name="fullname" placeholder="Full name">
                     </div>
                 </div>
                 <div class="field">
@@ -24,33 +31,31 @@
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Wachtwoord">
+                        <input type="password" name="password" placeholder="Password">
                     </div>
                 </div>
 
-                <h4 class="ui dividing header">Adresgegevens</h4>
+                <h4 class="ui dividing header">Shipping Address</h4>
 
                 <div class="fields">
                     <div class="twelve wide field">
-                        <input type="text" name="street" placeholder="Straat">
+                        <input type="text" name="street" placeholder="Street">
                     </div>
                     <div class="four wide field">
-                        <input type="text" name="streetnumber" placeholder="Huisnummer">
+                        <input type="text" name="streetnumber" placeholder="#">
                     </div>
                 </div>
                 <div class="fields">
                     <div class="eight wide field">
-                        <input type="text" name="city" placeholder="Stad">
+                        <input type="text" name="city" placeholder="City">
                     </div>
                     <div class="eight wide field">
-                        <input type="text" name="zipcode" placeholder="Postcode">
+                        <input type="text" name="zipcode" placeholder="Zip Code">
                     </div>
                 </div>
 
-                <div class="ui fluid large {% PRIMARY_COLOR %} submit button">Account maken</div>
+                <input type="submit" class="ui fluid large {% PRIMARY_COLOR %} submit button" value="Create Account"/>
             </div>
-        
-            <div class="ui error message"></div>
         </form>
     </div>
 </div>

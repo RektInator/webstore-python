@@ -10,11 +10,13 @@ def overview(request):
     return renderer.RenderWithContext(request, 'store/account/overview.html')
 
 def register(request):
-    return renderer.RenderWithContext(request, 'store/account/register.html')
+    if request.method == 'POST':
+        return HttpResponse("not yet implemented")
+    else:
+        return renderer.RenderWithContext(request, 'store/account/register.html')
 
 def login(request):
     if request.method == 'POST':
-        
         email = request.POST.get("email", "")
         password = request.POST.get("password", "")
 
@@ -39,6 +41,5 @@ def login(request):
             )
 
         return HttpResponse(hashedpassword)
-
     else:
         return renderer.RenderWithContext(request, 'store/account/login.html')

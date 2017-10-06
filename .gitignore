@@ -2,6 +2,7 @@ static/admin/
 static\admin\
 static/admin/*
 static\admin\*
+store/migrations/
 
 # Created by https://www.gitignore.io/api/python,django,visualstudio,visualstudiocode
 
@@ -418,4 +419,6 @@ paket-files/
 # By default, sensitive information, such as encrypted password
 # should be stored in the .pubxml.user file.
 
-# End of https://www.gitignore.io/api/python,django,visualstudio,visualstudiocode 
+# End of https://www.gitignore.io/api/python,django,visualstudio,visualstudiocode temp_data.json 
+
+temp_data.json

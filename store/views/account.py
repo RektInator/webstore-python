@@ -76,3 +76,10 @@ def login(request):
 def logout(request):
     request.session.clear()
     return redirect("index")
+
+def orders(request):
+    return renderer.RenderWithContext(request, 'store/account/orders.html', 
+        {
+            "hasOrders": False
+        }
+    )

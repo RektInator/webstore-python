@@ -1,0 +1,14 @@
+{% extends "store/base.html" %}
+{% load site_conf %}
+
+{% block content %}
+<div class="ui middle aligned center aligned grid">
+    <div class="twelve wide column">
+        {% if hasOrders %}
+        
+        {% else %}
+        <div class="ui succeeded message">You don't have any orders yet!</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

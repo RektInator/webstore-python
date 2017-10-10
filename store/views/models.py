@@ -37,8 +37,8 @@ class ProductImages(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
 class Category(models.Model):
-    name = models.CharField(max_length=128)
-    # more?
+    name = models.CharField(max_length=64)
+    url = models.URLField()
 
 class ProductCategories(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)

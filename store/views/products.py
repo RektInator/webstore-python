@@ -3,37 +3,26 @@ from django.shortcuts import render
 from django.template import loader
 from django.template.context import RequestContext
 from . import renderer
-
-class Product:
-    def __init__(self, name, image, description):
-        self.name = name
-        self.image = image
-        self.description = description
-
-    def name(self):
-        return self.name
-
-    def image(self):
-        return self.image
-
-    def description(self):
-        return self.description
+from . import models
 
 def item(request):
     return renderer.RenderWithContext(request, 'store/products/item.html')
 
-def cards(request):
-
-    products = [
-        Product("Test", "", "")
-    ]
+def queryProducts(request,productcat):
+    products = models.ProductCategories.objects.all().filter(
+        category=models.Category.objects.get(name=productcat)
+    )
 
     return renderer.RenderWithContext(request, 'store/products/products.html', {
         "products": products
     })
 
+def cards(request):
+    return queryProducts(request, "card")
+
 def posters(request):
-    return renderer.RenderWithContext(request, 'store/products/products.html')
+    return queryProducts(request, "poster")
 
 def canvas(request):
-    return renderer.RenderWithContext(request, 'store/products/products.html')
+    return queryProducts(request, "canvas")
+

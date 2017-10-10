@@ -9,15 +9,11 @@
         Products 
         <i class="dropdown icon"></i>
         <div class="menu">
-            <div class="item" onclick="window.location='/products/cards';">
-                Cards
-            </div>      
-            <div class="item" onclick="window.location='/products/posters';">
-                Posters
+            {% for cat in categories %}
+            <div class="item" onclick="window.location='/products/{{ cat.category.url }}';">
+                {{ cat.category.name }}
             </div>
-            <div class="item" onclick="window.location='/products/canvas';">
-                Canvas
-            </div>   
+            {% endfor %}
         </div>
     </a>
 

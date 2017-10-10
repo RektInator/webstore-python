@@ -13,9 +13,13 @@ def overview(request):
 
 def register(request):
     if request.method == 'POST':
+        # account details
         fullname = request.POST.get("fullname", "")
         email = request.POST.get("email", "")
         password = request.POST.get("password", "")
+
+        # shipping information
+        
 
         pwhasher = hashlib.sha512()
         pwhasher.update(password.encode('utf-8'))

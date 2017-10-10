@@ -6,7 +6,7 @@ class Address(models.Model):
     street = models.CharField(max_length=128)
     streetnumber = models.IntegerField()
     zipcode = models.CharField(max_length=10)
-    city = models.CharField(max_Length=64)
+    city = models.CharField(max_length=64)
 
 class Accounts(models.Model):
     GENDERS = (

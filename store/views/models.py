@@ -2,6 +2,12 @@ from django.db import models
 from django.db.models.fields.files import ImageField
 
 # Create your models here.
+class Address(models.Model):
+    street = models.CharField(max_length=128)
+    streetnumber = models.IntegerField()
+    zipcode = models.CharField(max_length=10)
+    city = models.CharField(max_Length=64)
+
 class Accounts(models.Model):
     GENDERS = (
         ("m", "Male"),
@@ -13,6 +19,8 @@ class Accounts(models.Model):
     password = models.CharField(max_length=128)
     birthday = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDERS)
+    billingaddress = models.ForeignKey(Address, on_delete=models.CASCADE)
+    shippingaddress = models.ForeignKey(Address, on_delete=models.CASCADE)
 
 class Products(models.Model):
     name = models.CharField(max_length=256)

@@ -21,19 +21,28 @@ class Accounts(models.Model):
     gender = models.CharField(max_length=1, choices=GENDERS)
     billingaddress = models.ForeignKey(Address, on_delete=models.CASCADE)
     shippingaddress = models.ForeignKey(Address, on_delete=models.CASCADE)
-
-class Products(models.Model):
-    name = models.CharField(max_length=256)
-    description = models.CharField(max_length=1024)
-
+    
 class Image(models.Model):
     caption = models.CharField(max_length=64, blank=True)
     blob = ImageField(max_length=16777216)
     url = models.URLField()
 
+class Products(models.Model):
+    name = models.CharField(max_length=256)
+    description = models.CharField(max_length=1024)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+
 class ProductImages(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
+
+class Category(models.Model):
+    name = models.CharField(max_length=128)
+    # more?
+
+class ProductCategories(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 class Orders(models.Model):
     customer = models.ForeignKey(Accounts, on_delete=models.CASCADE)

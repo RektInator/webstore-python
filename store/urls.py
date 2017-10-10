@@ -18,7 +18,9 @@ urlpatterns = [
 
     # products
     url(r'^products/item', products.item, name='item'),
-    url(r'^products/', products.list, name='products'),
+    url(r'^products/cards', products.cards, name='cards'),
+    url(r'^products/posters', products.posters, name='cards'),
+    url(r'^products/canvas', products.canvas, name='cards'),
 
     url(r'^$', index.main, name='index'),
 ]

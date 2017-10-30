@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^account/login', account.login, name='login'),
     url(r'^account/logout', account.logout, name='logout'),
     url(r'^account/orders', account.orders, name='orders'),
+    url(r'^account/wishlist', account.wishlist, name='wishlist'),
     url(r'^account/', account.overview, name='overview'),
     
     # storage endpoints
@@ -22,8 +23,8 @@ urlpatterns = [
     # products
     url(r'^products/item', products.item, name='item'),
     url(r'^products/cards', products.cards, name='cards'),
-    url(r'^products/posters', products.posters, name='cards'),
-    url(r'^products/canvas', products.canvas, name='cards'),
+    url(r'^products/posters', products.posters, name='posters'),
+    url(r'^products/canvas', products.canvas, name='canvas'),
 
 	# static pages
 	url(r'^contact', contact.contact, name='contact'),

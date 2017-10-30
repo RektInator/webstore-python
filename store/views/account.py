@@ -82,8 +82,21 @@ def logout(request):
     return redirect("index")
 
 def orders(request):
-    return renderer.RenderWithContext(request, 'store/account/orders.html', 
-        {
-            "hasOrders": False
-        }
-    )
+	if request.session.get("IsLoggedIn", False):
+		return renderer.RenderWithContext(request, 'store/account/orders.html', 
+			{
+				"hasOrders": False
+			}
+		)
+	else:
+		return redirect("login")
+
+def wishlist(request):
+	if request.session.get("IsLoggedIn", False):
+		return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
+			{
+				"hasProducts": False
+			}
+		)
+	else:
+		return redirect("login")

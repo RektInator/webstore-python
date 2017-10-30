@@ -5,6 +5,7 @@ from .views import account
 from .views import products
 from .views import storage
 from .views import contact
+from .views import faq
 
 urlpatterns = [
     # account endpoints
@@ -25,6 +26,7 @@ urlpatterns = [
 
 	# static pages
 	url(r'^contact', contact.contact, name='contact'),
+	url(r'^faq', faq.faq, name='faq'),
 
     url(r'^$', index.main, name='index'),
 ]

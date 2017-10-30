@@ -4,6 +4,7 @@ from .views import index
 from .views import account
 from .views import products
 from .views import storage
+from .views import contact
 
 urlpatterns = [
     # account endpoints
@@ -21,6 +22,9 @@ urlpatterns = [
     url(r'^products/cards', products.cards, name='cards'),
     url(r'^products/posters', products.posters, name='cards'),
     url(r'^products/canvas', products.canvas, name='cards'),
+
+	# static pages
+	url(r'^contact', contact.contact, name='contact'),
 
     url(r'^$', index.main, name='index'),
 ]

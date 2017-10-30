@@ -16,6 +16,18 @@
             {% endfor %}
         </div>
     </a>
+    <a href="/contact" class="item">
+        Contact
+    </a>
+    <a href="/faq" class="item">
+        FAQ
+    </a>
+    <a href="/sale" class="item">
+         Sale
+    </a>
+    
+        
+
 
     {% if IsLoggedIn %}
     <a href="#" class="ui right floated dropdown item">
@@ -43,11 +55,11 @@
     </a>
     {% else %}
     <div class="right menu">
-        <a class="item" href="/account/register">
-            <div class="ui {% PRIMARY_COLOR %} button">Sign up</div>
-        </a>
         <a class="item" href="/account/login">
             <div class="ui button">Log-in</div>
+        </a>        
+        <a class="item" href="/account/register">
+            <div class="ui {% PRIMARY_COLOR %} button">Sign up</div>
         </a>
     </div>
     {% endif %}

@@ -19,33 +19,33 @@ class Accounts(models.Model):
     password = models.CharField(max_length=128)
     birthday = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDERS)
-    billingaddress = models.ForeignKey(Address, on_delete=models.CASCADE)
-    shippingaddress = models.ForeignKey(Address, on_delete=models.CASCADE)
+    billingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
+    shippingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
     
 class Image(models.Model):
     caption = models.CharField(max_length=64, blank=True)
-    blob = ImageField(max_length=16777216)
+    # blob = models.BinaryField(max_length=16777216)
     url = models.URLField()
 
 class Products(models.Model):
     name = models.CharField(max_length=256)
-    description = models.CharField(max_length=1024)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    description = models.CharField(max_length=512)
+    image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
 
 class ProductImages(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
     url = models.URLField()
 
 class ProductCategories(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, null=True, on_delete=models.CASCADE)
 
 class Orders(models.Model):
-    customer = models.ForeignKey(Accounts, on_delete=models.CASCADE)
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
     date = models.DateField()
     amount = models.IntegerField()

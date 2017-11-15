@@ -10,8 +10,8 @@
         <i class="dropdown icon"></i>
         <div class="menu">
             {% for cat in categories %}
-            <div class="item" onclick="window.location='/products/{{ cat.category.url }}';">
-                {{ cat.category.name }}
+            <div class="item" onclick="window.location='/products/{{ cat.url }}';">
+                {{ cat.name }}
             </div>
             {% endfor %}
         </div>

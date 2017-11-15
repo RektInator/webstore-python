@@ -8,6 +8,6 @@ def RenderWithContext(request, page, context = {}):
     context["Fullname"] = request.session.get("Fullname", "")
     context["Email"] = request.session.get("Email", "")
     context["UID"] = request.session.get("UID", 0)
-    context["categories"] = models.ProductCategories.objects.all()
+    context["categories"] = models.Category.objects.all()
 
     return render(request, page, context)

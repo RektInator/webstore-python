@@ -1,4 +1,5 @@
 {% extends "store/base.html" %}
+{% load static %}
 {% load site_conf %}
 
 {% block content %}
@@ -18,7 +19,7 @@
     {% for pr in products %}
     <div class="card">
         <div class="image" style="width:100%;height:300">
-            <img src="{{ pr.product.image.url }}">
+            <img src="{% static 'store/img/' %}{{pr.product.image.url}}">
         </div>
         <div class="content">
             <a class="header">{{ pr.product.name }}</a>

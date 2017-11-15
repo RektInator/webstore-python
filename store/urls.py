@@ -22,9 +22,7 @@ urlpatterns = [
 
     # products
     url(r'^products/item', products.item, name='item'),
-    url(r'^products/cards', products.cards, name='cards'),
-    url(r'^products/posters', products.posters, name='posters'),
-    url(r'^products/canvas', products.canvas, name='canvas'),
+    url(r'^products/', products.index, name='products'),
 
 	# static pages
 	url(r'^contact', contact.contact, name='contact'),

@@ -9,20 +9,19 @@ def item(request):
     return renderer.RenderWithContext(request, 'store/products/item.html')
 
 def queryProducts(request,productcat):
-    products = models.ProductCategories.objects.all().filter(
-        category=models.Category.objects.get(name=productcat)
-    )
+    products = models.ProductCategories.objects.all()
+    
+    if productcat != "all":
+        products = products.filter(
+            category=models.Category.objects.get(url=productcat)
+        )
 
     return renderer.RenderWithContext(request, 'store/products/products.html', {
         "products": products
     })
 
-def cards(request):
-    return queryProducts(request, "card")
-
-def posters(request):
-    return queryProducts(request, "poster")
-
-def canvas(request):
-    return queryProducts(request, "canvas")
-
+def index(request):
+    if len(request.path) <= 10:
+        return queryProducts(request, "all")
+    else:
+        return queryProducts(request, request.path[10:])

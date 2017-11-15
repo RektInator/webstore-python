@@ -1,0 +1,20 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load site_conf %}
+
+{% block content %}
+<div class="ui segment">
+    <h2 class="ui floated header">{{product.name}}</h2>
+    <div class="ui clearing divider"></div>
+    <p>
+        <div class="ui grid">
+            <div class="four wide column">
+                <img class="ui medium rounded image" src="{% static '/store/img/' %}{{product.image.url}}">                
+            </div>
+            <div class="eight wide column">
+                {{product.description}}              
+            </div>
+        </div>
+    </p>
+  </div>
+{% endblock %}

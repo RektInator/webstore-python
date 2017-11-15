@@ -5,7 +5,7 @@
 {% block content %}
 <div class="ui link cards">
     {% for pr in products %}
-    <div class="card">
+    <div class="card" onclick="window.location='/products/item/{{pr.product.id}}';">
         <div class="image" style="size:auth;">
             <img src="{% static 'store/img/' %}{{pr.product.image.url}}">
         </div>

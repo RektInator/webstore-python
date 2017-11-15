@@ -6,7 +6,12 @@ from . import renderer
 from . import models
 
 def item(request):
-    return renderer.RenderWithContext(request, 'store/products/item.html')
+
+    product = models.Products.objects.get(id=int(request.path[15:]))
+
+    return renderer.RenderWithContext(request, 'store/products/item.html', {
+        "product": product
+    })
 
 def queryProducts(request,productcat):
     products = models.ProductCategories.objects.all()

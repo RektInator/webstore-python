@@ -3,16 +3,21 @@
 {% load site_conf %}
 
 {% block content %}
+{% if error %}
+<div class="ui error message">Product not found.</div>
+{% else %}
 <div class="ui segment">
     <h2 class="ui floated header">{{product.name}}</h2>
     <div class="ui clearing divider"></div>
         <div class="ui grid">
-            <div class="seven wide column">
+            <div class="six wide column">
                 <img class="ui massive rounded image" src="{% static '/store/img/' %}{{product.image.url}}">                
             </div>
             <div class="eight wide column">
                 <h3>{{product.description}}</h3>            
             </div>
         </div>
-  </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

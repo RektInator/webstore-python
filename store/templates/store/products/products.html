@@ -3,6 +3,9 @@
 {% load site_conf %}
 
 {% block content %}
+{% if error %}
+<div class="ui error message">Category not found.</div>
+{% else %}
 <div class="ui link cards">
     {% for pr in products %}
     <div class="card" onclick="window.location='/products/item/{{pr.product.id}}';">
@@ -18,4 +21,5 @@
     </div>
     {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

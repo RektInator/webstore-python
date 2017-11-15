@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^account/logout', account.logout, name='logout'),
     url(r'^account/orders', account.orders, name='orders'),
     url(r'^account/wishlist', account.wishlist, name='wishlist'),
+	url(r'^account/cart', account.cart, name='cart'),
     url(r'^account/', account.overview, name='overview'),
     
     # storage endpoints

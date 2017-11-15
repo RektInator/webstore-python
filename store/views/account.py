@@ -100,3 +100,13 @@ def wishlist(request):
 		)
 	else:
 		return redirect("login")
+
+def cart(request):
+	if request.session.get("IsLoggedIn", False):
+		return renderer.RenderWithContext(request, 'store/account/cart.html', 
+			{
+				"hasProducts": False
+			}
+		)
+	else:
+		return redirect("login")

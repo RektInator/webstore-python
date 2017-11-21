@@ -63,7 +63,7 @@ def login(request):
             request.session["Fullname"] = account.fullname
             request.session["Email"] = account.email
             request.session["IsLoggedIn"] = True
-            request.session["UID"] = 0
+            request.session["UID"] = account.id
 
         except (models.Accounts.DoesNotExist):
             return renderer.RenderWithContext(request, 'store/account/login.html',
@@ -92,14 +92,24 @@ def orders(request):
 		return redirect("login")
 
 def wishlist(request):
-	if request.session.get("IsLoggedIn", False):
-		return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
-			{
-				"hasProducts": False
-			}
-		)
-	else:
-		return redirect("login")
+    if request.session.get("IsLoggedIn", False):
+        try:
+            customer = models.Accounts.objects.get(id=request.session.get("UID", 0))
+            products = models.Wishlist.objects.get(customer=customer)
+            return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
+                {
+				    "hasProducts": True,
+                    "products": products
+                }
+            )
+        except:
+            return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
+                {
+                    "hasProducts": False
+                }
+            )
+    else:
+        return redirect("login")
 
 def cart(request):
 	if request.session.get("IsLoggedIn", False):

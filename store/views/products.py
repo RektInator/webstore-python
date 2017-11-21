@@ -4,14 +4,39 @@ from django.template import loader
 from django.template.context import RequestContext
 from . import renderer
 from . import models
+from django.shortcuts import redirect
 
 def item(request):
 
     try:
-        product = models.Products.objects.get(id=int(request.path[15:]))
+        requestPath = request.path.split("/")
+        action = ""
+
+        if len(requestPath) == 5:
+            action = requestPath[4]
+
+        pid = int(requestPath[3])
+        product = models.Products.objects.get(id=pid)
+        productAdded = False
+
+        if request.method == 'POST':
+            if request.session.get("IsLoggedIn", False) == False:
+                return redirect("login")
+
+            customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+            if action == "wishlist":
+                item = models.Wishlist(customer=customer, product=product)
+                item.save()
+            elif action == "shoppingcart":
+                item = models.Shoppingcart(customer=customer, product=product)
+                item.save()
+
+            productAdded = True
 
         return renderer.RenderWithContext(request, 'store/products/item.html', {
-            "product": product
+            "product": product,
+            "added": productAdded,
+            "addedTo": action
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/item.html', {

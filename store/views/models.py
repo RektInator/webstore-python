@@ -49,3 +49,11 @@ class Orders(models.Model):
     product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
     date = models.DateField()
     amount = models.IntegerField()
+
+class Wishlist(models.Model):
+    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
+
+class Shoppingcart(models.Model):
+    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)

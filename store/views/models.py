@@ -21,7 +21,8 @@ class Accounts(models.Model):
     gender = models.CharField(max_length=1, choices=GENDERS)
     billingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
     shippingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
-    
+    administrator = models.BooleanField(default=False)
+
 class Image(models.Model):
     caption = models.CharField(max_length=64, blank=True)
     # blob = models.BinaryField(max_length=16777216)

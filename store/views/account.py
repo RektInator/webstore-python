@@ -102,12 +102,12 @@ def orders(request):
 def wishlist(request):
     if request.session.get("IsLoggedIn", False):
         try:
-            customer = models.Accounts.objects.get(id=request.session.get("UID", 0))
-            products = models.Wishlist.objects.get(customer=customer)
+            customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+            wishlist = models.Wishlist.objects.all().filter(customer=customer)
             return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
                 {
 				    "hasProducts": True,
-                    "products": products
+                    "wishlist": wishlist
                 }
             )
         except:
@@ -120,11 +120,21 @@ def wishlist(request):
         return redirect("login")
 
 def cart(request):
-	if request.session.get("IsLoggedIn", False):
-		return renderer.RenderWithContext(request, 'store/account/cart.html', 
-			{
-				"hasProducts": False
-			}
-		)
-	else:
-		return redirect("login")
+    if request.session.get("IsLoggedIn", False):
+        try:
+            customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+            cart = models.Shoppingcart.objects.all().filter(customer=customer)
+            return renderer.RenderWithContext(request, 'store/account/cart.html', 
+                {
+				    "hasProducts": True,
+                    "cart": cart
+                }
+            )
+        except:
+            return renderer.RenderWithContext(request, 'store/account/cart.html', 
+                {
+                    "hasProducts": False
+                }
+            )
+    else:
+        return redirect("login")

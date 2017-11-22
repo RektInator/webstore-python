@@ -33,6 +33,19 @@ class Products(models.Model):
     description = models.CharField(max_length=512)
     image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
 
+class ProductType(models.Model):
+    name = models.CharField(max_length=256)
+    price = models.FloatField(default=0)
+
+class ProductSize(models.Model):
+    width = models.FloatField(default=0)
+    height = models.FloatField(default=0)
+    price = models.FloatField(default=0)
+
+class ProductTypeSize(models.Model):
+    type = models.ForeignKey(ProductSize, null=True, on_delete=models.CASCADE)
+    size = models.ForeignKey(ProductType, null=True, on_delete=models.CASCADE)
+
 class ProductImages(models.Model):
     product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
@@ -52,9 +65,11 @@ class Orders(models.Model):
     amount = models.IntegerField()
 
 class Wishlist(models.Model):
-    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
-    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Accounts, null=True)
+    product = models.ForeignKey(Products, null=True)
 
 class Shoppingcart(models.Model):
-    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
-    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
+    customer = models.ForeignKey(Accounts, null=True)
+    product = models.ForeignKey(Products, null=True)
+    type = models.ForeignKey(ProductType, null=True)
+    size = models.ForeignKey(ProductSize, null=True)

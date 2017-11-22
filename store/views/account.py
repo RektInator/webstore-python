@@ -36,7 +36,15 @@ def register(request):
             )
         except(models.Accounts.DoesNotExist):
             account = models.Accounts(fullname=fullname, email=email, password=hashedpassword, birthday=datetime.datetime.now())
-            account.save()
+            if '@' not in email:
+                return renderer.RenderWithContext(request, 'store/account/register.html',
+                {
+                    "error": True,
+                    "description": "Please enter valid email",
+                }
+            )
+            else:
+                account.save()
         
             return renderer.RenderWithContext(request, 'store/account/register.html',
                 {

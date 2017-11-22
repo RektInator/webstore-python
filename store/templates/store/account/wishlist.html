@@ -7,7 +7,7 @@
         {% if hasProducts %}
         <div class="ui relaxed divided list">
             {% for pr in wishlist %}
-              <div class="item">
+              <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
                 <i class="large middle aligned icon"></i>
                 <div class="content">
                   <a class="header">{{pr.product.name}}</a>

@@ -7,7 +7,13 @@
 <div class="ui error message">Product not found.</div>
 {% else %}
 {% if added %}
-<div class="ui succeeded message">Product added to the {{addedTo}}!</div>
+<div class="ui succeeded message">Product
+    {% if removed %}
+    removed from
+    {% else %}
+    added to 
+    {% endif %}
+    the {{addedTo}}!</div>
 {% endif %}
 <div class="ui segment">
     <h2 class="ui floated header">{{product.name}}</h2>

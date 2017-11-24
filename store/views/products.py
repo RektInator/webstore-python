@@ -18,6 +18,7 @@ def item(request):
         pid = int(requestPath[3])
         product = models.Products.objects.get(id=pid)
         productAdded = False
+        productRemoved = False
 
         if request.method == 'POST':
             if request.session.get("IsLoggedIn", False) == False:
@@ -29,18 +30,19 @@ def item(request):
 
                 if existingEntry.exists():
                     existingEntry.delete()
+                    productRemoved = True
                 else:
                     item = models.Wishlist(customer=customer, product=product)
                     item.save()
             elif action == "shoppingcart":
                 item = models.Shoppingcart(customer=customer, product=product)
                 item.save()
-
             productAdded = True
 
         return renderer.RenderWithContext(request, 'store/products/item.html', {
             "product": product,
             "added": productAdded,
+			"removed": productRemoved,
             "addedTo": action
         })
     except:

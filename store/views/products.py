@@ -25,8 +25,13 @@ def item(request):
 
             customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
             if action == "wishlist":
-                item = models.Wishlist(customer=customer, product=product)
-                item.save()
+                existingEntry = models.Wishlist.objects.filter(customer=customer, product=product)
+
+                if existingEntry.exists():
+                    existingEntry.delete()
+                else:
+                    item = models.Wishlist(customer=customer, product=product)
+                    item.save()
             elif action == "shoppingcart":
                 item = models.Shoppingcart(customer=customer, product=product)
                 item.save()

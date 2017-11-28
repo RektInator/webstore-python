@@ -18,8 +18,13 @@ def item(request):
         pid = int(requestPath[3])
         product = models.Products.objects.get(id=pid)
         productAdded = False
+        error = False
+        errorMessage = ""
 
         if request.method == 'POST':
+
+            productSize = request.POST.get("size", "");
+
             if request.session.get("IsLoggedIn", False) == False:
                 return redirect("login")
 
@@ -32,20 +37,30 @@ def item(request):
                 else:
                     item = models.Wishlist(customer=customer, product=product)
                     item.save()
+
+                productAdded = True
             elif action == "shoppingcart":
-                item = models.Shoppingcart(customer=customer, product=product)
-                item.save()
-
-            productAdded = True
-
+                if productSize != "":
+                    item = models.Shoppingcart(customer=customer, product=product, type=models.ProductSize.objects.get(id=int(productSize)))
+                    item.save()
+                    productAdded = True
+                else:
+                    error = True
+                    productAdded = False
+                    errorMessage = "You must choose a product size."
+                
         return renderer.RenderWithContext(request, 'store/products/item.html', {
             "product": product,
             "added": productAdded,
-            "addedTo": action
+            "addedTo": action,
+            "size": models.ProductSize.objects.all(),
+            "error": error,
+            "errorMessage": errorMessage,
+            "productFound": True
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/item.html', {
-            "error": True
+            "productFound": False
         })
 
 def queryProducts(request,productcat):

@@ -4,17 +4,26 @@
 {% block content %}
 <div class="ui middle aligned center aligned grid">
     <div class="twelve wide column">
+        <h4 class="ui horizontal divider header">
+          <i class="cart icon"></i>
+          Shoppingcart
+        </h4>
         {% if hasProducts %}
-        <div class="ui relaxed divided list">
+        <div class="ui middle aligned divided list">
             {% for pr in cart %}
                 <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
                     <i class="large middle aligned icon"></i>
                     <div class="content">
-                        <a class="header">{{pr.product.name}}</a>
-                        <div class="description">{{pr.product.desc}}</div>
+                        <a class="header">{{pr.product.name}} </a>
+                        <div class="description">{{pr.type.name}} ({{pr.type.width}} x {{pr.type.height}})</div>
+                    </div>
+                    <div class="right floated content">
+                      <div class="header"> &euro;{{pr.type.price}}</div>
                     </div>
                 </div>
             {% endfor %}
+            <div class="ui divider"></div>
+
             <form action="/account/order" method="post">
                 {% csrf_token %}
                 <button class="ui {% PRIMARY_COLOR %} button">

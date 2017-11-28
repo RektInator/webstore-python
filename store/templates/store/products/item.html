@@ -3,11 +3,14 @@
 {% load site_conf %}
 
 {% block content %}
-{% if error %}
+{% if not productFound %}
 <div class="ui error message">Product not found.</div>
 {% else %}
 {% if added %}
 <div class="ui succeeded message">Product added to the {{addedTo}}!</div>
+{% endif %}
+{% if error %}
+<div class="ui error message">{{errorMessage}}</div>
 {% endif %}
 <div class="ui segment">
     <h2 class="ui floated header">{{product.name}}</h2>
@@ -33,7 +36,13 @@
                 <h3>Order Product</h3>
             </div>
             <form action="/products/item/{{product.id}}/shoppingcart" method="post">
-                {% csrf_token %}                
+                {% csrf_token %}       
+                <select class="ui dropdown" id="size">
+                    <option value="">Size</option>
+                    {% for s in size %}
+                    <option value="{{s.id}}">&euro;{{s.price}} {{s.name}} ({{s.width}} x {{s.height}})</option>
+                    {% endfor %}
+                </select>
                 <button class="ui {% PRIMARY_COLOR %} button">
                     <i class="cart icon"></i>Add to cart
                 </button>

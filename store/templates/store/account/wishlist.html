@@ -1,17 +1,24 @@
 {% extends "store/base.html" %}
+{% load static %}
 {% load site_conf %}
 
 {% block content %}
 <div class="ui middle aligned center aligned grid">
     <div class="twelve wide column">
+        <h4 class="ui horizontal divider header">
+          <i class="heart icon"></i>
+          Wishlist
+        </h4>
         {% if hasProducts %}
         <div class="ui relaxed divided list">
             {% for pr in wishlist %}
               <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
                 <i class="large middle aligned icon"></i>
                 <div class="content">
+                    <div class="ui small image">
+                      <img src="{% static '/store/img/' %}{{pr.product.image.url}}">
+                    </div>
                   <a class="header">{{pr.product.name}}</a>
-                  <div class="description">{{pr.product.desc}}</div>
                 </div>
               </div>
             {% endfor %}

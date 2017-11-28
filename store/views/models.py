@@ -33,18 +33,11 @@ class Products(models.Model):
     description = models.CharField(max_length=512)
     image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
 
-class ProductType(models.Model):
-    name = models.CharField(max_length=256)
-    price = models.FloatField(default=0)
-
 class ProductSize(models.Model):
     width = models.FloatField(default=0)
     height = models.FloatField(default=0)
     price = models.FloatField(default=0)
-
-class ProductTypeSize(models.Model):
-    type = models.ForeignKey(ProductSize, null=True, on_delete=models.CASCADE)
-    size = models.ForeignKey(ProductType, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=128, default="")
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
@@ -71,5 +64,4 @@ class Wishlist(models.Model):
 class Shoppingcart(models.Model):
     customer = models.ForeignKey(Accounts, null=True)
     product = models.ForeignKey(Products, null=True)
-    type = models.ForeignKey(ProductType, null=True)
-    size = models.ForeignKey(ProductSize, null=True)
+    type = models.ForeignKey(ProductSize, null=True)

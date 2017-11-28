@@ -34,6 +34,7 @@ def item(request):
 
                 if existingEntry.exists():
                     existingEntry.delete()
+                    productRemoved = True
                 else:
                     item = models.Wishlist(customer=customer, product=product)
                     item.save()

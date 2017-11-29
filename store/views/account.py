@@ -9,8 +9,16 @@ import datetime
 from django.shortcuts import redirect
 
 def overview(request):
-    return renderer.RenderWithContext(request, 'store/account/overview.html')
+    if request.session.get("IsLoggedIn", False):
+        try:
+            return renderer.RenderWithContext(request, 'store/account/overview.html', 
+            {
+                "user": models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+            })
+        except:
+            return redirect("login")
 
+    return redirect("login")
 def register(request):
     if request.method == 'POST':
         # account details

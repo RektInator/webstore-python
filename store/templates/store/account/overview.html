@@ -1,0 +1,41 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load site_conf %}
+
+{% block content %}
+<div class="ui middle aligned center aligned grid">
+    <div class="twelve wide column">
+        <h4 class="ui horizontal divider header">
+          <i class="user icon"></i>
+          Account overview
+        </h4>     
+    <div class="ui segments">
+      <div class="ui segment">
+         {{user.fullname}}
+      </div>
+      <div class="ui segment">
+         {{user.email}}
+      </div>
+      <div class="ui segment">
+         {{user.birthday}}
+      </div>
+      <div class="ui segment">
+         {{user.gender}}
+      </div>
+      <div class="ui segment">
+         {{user.billingaddress.street}}
+         {{user.billingaddress.streetnumber}}, 
+         {{user.billingaddress.zipcode}}<br/>
+         {{user.billingaddress.city}}
+      </div>
+      <div class="ui segment">
+         {{user.shippingaddress.street}}
+         {{user.shippingaddress.streetnumber}}, 
+         {{user.shippingaddress.zipcode}}<br/>
+         {{user.shippingaddress.city}}
+      </div>
+  </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

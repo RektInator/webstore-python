@@ -20,6 +20,7 @@ def item(request):
         productAdded = False
         error = False
         errorMessage = ""
+        productRemoved = False
 
         if request.method == 'POST':
 
@@ -57,7 +58,8 @@ def item(request):
             "size": models.ProductSize.objects.all(),
             "error": error,
             "errorMessage": errorMessage,
-            "productFound": True
+            "productFound": True,
+            "removed": productRemoved
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/item.html', {

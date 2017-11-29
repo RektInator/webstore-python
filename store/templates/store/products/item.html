@@ -46,7 +46,7 @@
                 <select class="ui dropdown" name="size">
                     <option value="">Size</option>
                     {% for s in size %}
-                    <option value="{{s.id}}">&euro;{{s.price}} {{s.name}} ({{s.width}} x {{s.height}})</option>
+                    <option value="{{s.id}}">&euro;{{s.price}} {{s.name}} ({{s.width}} x {{s.height}} cm)</option>
                     {% endfor %}
                 </select>
                 <button class="ui {% PRIMARY_COLOR %} button">

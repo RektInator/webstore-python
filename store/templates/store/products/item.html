@@ -43,7 +43,7 @@
             </div>
             <form action="/products/item/{{product.id}}/shoppingcart" method="post">
                 {% csrf_token %}       
-                <select class="ui dropdown" id="size">
+                <select class="ui dropdown" name="size">
                     <option value="">Size</option>
                     {% for s in size %}
                     <option value="{{s.id}}">&euro;{{s.price}} {{s.name}} ({{s.width}} x {{s.height}})</option>

@@ -132,10 +132,16 @@ def cart(request):
         try:
             customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
             cart = models.Shoppingcart.objects.all().filter(customer=customer)
+
+            totalprice = 0
+            for item in cart:
+                totalprice += item.type.price
+
             return renderer.RenderWithContext(request, 'store/account/cart.html', 
                 {
 				    "hasProducts": True,
-                    "cart": cart
+                    "cart": cart,
+                    "totalprice": totalprice
                 }
             )
         except:

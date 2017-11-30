@@ -24,6 +24,13 @@
             {% endfor %}
             <div class="ui divider"></div>
 
+            <div class="content">
+                        <a class="header"> Total: </a>
+                    </div>
+            <div class="right floated content">
+                  <div class="header"> &euro;{{ totalprice }}</div>
+            </div>
+
             <form action="/account/order" method="post">
                 {% csrf_token %}
                 <button class="ui {% PRIMARY_COLOR %} button">

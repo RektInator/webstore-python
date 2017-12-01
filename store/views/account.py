@@ -110,8 +110,23 @@ def orders(request):
 def wishlist(request):
     if request.session.get("IsLoggedIn", False):
         try:
+
+            requestPath = request.path.split("/")
+            action = ""
+            id = 0
+
+            if len(requestPath) == 5:
+                id = requestPath[4]
+                action = requestPath[3]
+
             customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+
+            if action == "remove":
+                product = models.Products.objects.filter(id=int(id))
+                entry = models.Wishlist.objects.filter(customer=customer, product=product).remove()
+
             wishlist = models.Wishlist.objects.all().filter(customer=customer)
+
             return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
                 {
 				    "hasProducts": True,
@@ -130,7 +145,19 @@ def wishlist(request):
 def cart(request):
     if request.session.get("IsLoggedIn", False):
         try:
+            action = ""
+            id = 0
+
+            if len(requestPath) == 5:
+                id = requestPath[4]
+                action = requestPath[3]
+
             customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+
+            if action == "remove":
+                product = models.Products.objects.filter(id=int(id))
+                models.Shoppingcart.objects.filter(customer=customer, product=product).remove()
+
             cart = models.Shoppingcart.objects.all().filter(customer=customer)
 
             totalprice = 0

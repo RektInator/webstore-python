@@ -145,6 +145,7 @@ def wishlist(request):
 def cart(request):
     if request.session.get("IsLoggedIn", False):
         try:
+            requestPath = request.path.split("/")
             action = ""
             id = 0
 

@@ -17,10 +17,12 @@
                         <a class="header">{{pr.product.name}} </a>
                         <div class="description">{{pr.type.name}} ({{pr.type.width}} x {{pr.type.height}} cm)</div>
                     </div>
-                    <div class="right floated content">
-                      <div class="header"> &euro;{{pr.type.price}}</div>
+                    <div class="center floated content">
+                      <div class="header"> &euro; {{pr.type.price}}</div>
                     </div>
-                    <a href="/account/cart/remove/{{pr.product.id}}" >Remove</a>                    
+                    <div class="right floated content">
+                    <a href="/account/cart/remove/{{pr.product.id}}" ><i class="remove icon"></i>Remove</a>                    
+                    </div>
                 </div>
             {% endfor %}
             <div class="ui divider"></div>

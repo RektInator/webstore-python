@@ -144,7 +144,7 @@ def wishlist(request):
 
 def cart(request):
     if request.session.get("IsLoggedIn", False):
-        try:
+        # try:
             requestPath = request.path.split("/")
             action = ""
             id = 0
@@ -163,7 +163,7 @@ def cart(request):
 
             totalprice = 0
             for item in cart:
-                totalprice += item.type.price
+                totalprice += int(item.type.price)
 
             return renderer.RenderWithContext(request, 'store/account/cart.html', 
                 {
@@ -172,11 +172,11 @@ def cart(request):
                     "totalprice": totalprice
                 }
             )
-        except:
-            return renderer.RenderWithContext(request, 'store/account/cart.html', 
-                {
-                    "hasProducts": False
-                }
-            )
+        #except:
+        #    return renderer.RenderWithContext(request, 'store/account/cart.html', 
+        #        {
+        #            "hasProducts": False
+        #        }
+        #    )
     else:
         return redirect("login")

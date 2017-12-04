@@ -22,6 +22,18 @@
     <a href="/sale" class="item">
          Sale
     </a>
+
+    <div class="right menu">
+        <a class="item">
+       <div class="ui search">
+          <div class="ui icon input">
+            <input class="prompt" placeholder="Common passwords..." type="text">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+        </a>
+    </div>
     
         
 
@@ -54,6 +66,7 @@
             
         </div>
     </a>
+ 
     {% else %}
     <div class="right menu">
         <a class="item" href="/account/login">
@@ -64,4 +77,5 @@
         </a>
     </div>
     {% endif %}
+ 
 </div>

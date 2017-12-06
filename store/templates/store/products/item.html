@@ -19,24 +19,51 @@
 <div class="ui error message">{{errorMessage}}</div>
 {% endif %}
 <div class="ui segment">
+    {% if edit %}
+    <form action="/products/item/{{product.id}}/edit" method="post" class="ui form">
+    {% csrf_token %}        
+    {% endif %}
+
+    {% if not edit %}
     <h2 class="ui floated header">{{product.name}}</h2>
+    {% else %}
+    <div class="field">
+        <label>Name</label>
+        <input name="name" placeholder="{{product.name}}" type="text">
+    </div>
+    {% endif %}
+
+    {% if not edit %}
     <form action="/products/item/{{product.id}}/wishlist" method="post">
         {% csrf_token %}
         <button class="ui circular icon red button">
             <i class="heart icon"></i>
         </button>
     </form>
+    <button class="circular ui icon button" onclick="window.location='/products/item/{{product.id}}/edit';">
+        <i class="icon settings"></i>
+    </button>
+    {% endif %}
+
     <div class="ui clearing divider"></div>
     <div class="ui grid">
         <div class="five wide column">
             <img class="ui massive rounded image" src="{% static '/store/img/' %}{{product.image.url}}">
         </div>
         <div class="six wide column">
+            {% if not edit %}
             <div class="active title">    
                 <h3>Description</h3>
             </div>
             <h4>{{product.description}}</h4>            
+            {% else %}
+            <div class="field">
+                <label>Description</label>
+                <input name="desc" placeholder="{{product.description}}" type="text">
+            </div>
+            {% endif %}
         </div>
+        {% if not edit %}
         <div class="three wide column">
             <div class="active title">    
                 <h3>Order Product</h3>
@@ -54,7 +81,15 @@
                 </button>
             </form>
         </div>
+        {% endif %}
     </div>
+
+    {% if edit %}
+    <button class="ui {% PRIMARY_COLOR %} button" type="submit">Save</button>
+    <button class="ui button">Cancel</button>        
+    </form>
+
+    {% endif %}
 </div>
 {% endif %}
 {% endblock %}

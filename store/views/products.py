@@ -21,10 +21,11 @@ def item(request):
         error = False
         errorMessage = ""
         productRemoved = False
+        edit = False
 
         if request.method == 'POST':
 
-            productSize = request.POST.get("size", "");
+            productSize = request.POST.get("size", "")
 
             if request.session.get("IsLoggedIn", False) == False:
                 return redirect("login")
@@ -50,6 +51,17 @@ def item(request):
                     error = True
                     productAdded = False
                     errorMessage = "You must choose a product size."
+            elif action == "edit":
+                edit = False
+                if len(request.POST.get("name", "")) > 0:
+                    product.name = request.POST.get("name", product.name)
+                if len(request.POST.get("desc", "")) > 0:
+                    product.description = request.POST.get("desc", product.description)
+                product.save()
+
+        else:
+            if action == "edit":
+                edit = True
                 
         return renderer.RenderWithContext(request, 'store/products/item.html', {
             "product": product,
@@ -59,7 +71,8 @@ def item(request):
             "error": error,
             "errorMessage": errorMessage,
             "productFound": True,
-            "removed": productRemoved
+            "removed": productRemoved,
+            "edit": edit,
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/item.html', {

@@ -19,8 +19,8 @@ class Accounts(models.Model):
     password = models.CharField(max_length=128)
     birthday = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDERS)
-    billingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
-    shippingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE)
+    billingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE, related_name="billingaddr")
+    shippingaddress = models.ForeignKey(Address, null=True, on_delete=models.CASCADE, related_name="shippingaddr")
     administrator = models.BooleanField(default=False)
 
 class Image(models.Model):
@@ -58,10 +58,10 @@ class Orders(models.Model):
     amount = models.IntegerField()
 
 class Wishlist(models.Model):
-    customer = models.ForeignKey(Accounts, null=True)
-    product = models.ForeignKey(Products, null=True)
+    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
 
 class Shoppingcart(models.Model):
-    customer = models.ForeignKey(Accounts, null=True)
-    product = models.ForeignKey(Products, null=True)
-    type = models.ForeignKey(ProductSize, null=True)
+    customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
+    type = models.ForeignKey(ProductSize, null=True, on_delete=models.CASCADE)

@@ -34,7 +34,7 @@
                   <div class="header"> &euro;{{ totalprice }}</div>
             </div>
 
-            <form action="/account/order" method="post">
+            <form action="/payment" method="post">
                 {% csrf_token %}
                 <button class="ui {% PRIMARY_COLOR %} button">
                     Order Products

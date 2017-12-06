@@ -9,6 +9,7 @@ from .views import faq
 from .views import sale
 from .views import terms
 from .views import search
+from .views import payment
 
 urlpatterns = [
     # account endpoints
@@ -33,5 +34,6 @@ urlpatterns = [
 	url(r'^faq', faq.faq, name='faq'),
 	url(r'^sale', sale.sale, name='sale'),
     url(r'^search', search.search, name='search'),
+    url(r'^payment', payment.payment, name='payment'),
     url(r'^$', index.main, name='index'),
 ]

@@ -1,0 +1,91 @@
+{% extends "store/base.html" %}
+{% load site_conf %}
+
+{% block content %}
+<div class="ui horizontal segments">
+<div class="ui segment">
+<form class="ui form">
+  <h2 class="ui dividing header">Shipping Information</h2>
+  <div class="field">
+    <label>Name</label>
+      <div class="ten wide field">
+        <input name="shipping[full-name]" placeholder="{{customer.fullname}}" type="text">
+      </div>
+  </div>
+  <div class="field">
+    <label>Billing Address</label>
+    <div class="fields">
+      <div class="eight wide field">
+        <input name="shipping[address]" placeholder="{{customer.billingaddress.street}}" type="text">
+      </div>
+      <div class="two wide field">
+        <input name="shipping[address-2]" placeholder="{{customer.billingaddress.streetnumber}}" type="text">
+      </div>
+      </div>
+         <div class="fields">
+      <div class="three wide field">
+        <input name="shipping[address-3]" placeholder="{{customer.billingaddress.zipcode}}" type="text">
+      </div>
+      <div class="seven wide field">
+        <input name="shipping[address-4]" placeholder="{{customer.billingaddress.city}}" type="text">
+      </div>
+    </div>
+  </div>
+    <div class="six wide field">
+      <label>Country</label>
+      <select class="ui dropdown" name="country">
+            <option value="">the Netherlands</option>
+            <option value="">Belgium</option>        
+      </select>
+        </div>
+ 
+  <h4 class="ui dividing header">Shipping address</h4>
+  <div class="field">
+    <div class="fields">
+      <div class="eight wide field">
+        <input name="shipping[address]" placeholder="{{customer.shippingaddress.street}}" type="text">
+      </div>
+      <div class="two wide field">
+        <input name="shipping[address-2]" placeholder="{{customer.shippingaddress.streetnumber}}" type="text">
+      </div>
+      </div>
+         <div class="fields">
+      <div class="three wide field">
+        <input name="shipping[address-3]" placeholder="{{customer.shippingaddress.zipcode}}" type="text">
+      </div>
+      <div class="seven wide field">
+        <input name="shipping[address-4]" placeholder="{{customer.shippingaddress.city}}" type="text">
+      </div>
+       </div>
+      <div class="six wide field">
+      <label>Country</label>
+      <select class="ui dropdown" name="country">
+            <option value="">the Netherlands</option>
+            <option value="">Belgium</option>        
+      </select>
+      </div>
+   
+   <h4 class="ui dividing header">Receipt</h4>
+   <div class="field">
+    <label>Send Receipt To:</label>
+    <div class="ui buttons">
+      <button class="ui button">Billing address</button>
+      <div class="or"></div>
+      <button class="ui button">Shipping address</button>
+    </div>
+    </form>
+  </div>
+  </div>
+  </div>
+  <div class="ui segment">
+  <form class="ui form">
+  <p>Paypal will follow soon.....<p>
+  </form>
+  </div>
+  </div>
+    <div class="ui center aligned segment">
+   <div class="ui big violet button" tabindex="0">Submit Order</div>
+   </div>
+
+
+{% endblock %}

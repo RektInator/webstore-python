@@ -8,6 +8,7 @@ from .views import contact
 from .views import faq
 from .views import sale
 from .views import terms
+from .views import search
 
 urlpatterns = [
     # account endpoints
@@ -31,5 +32,6 @@ urlpatterns = [
     url(r'^terms', terms.terms, name='terms'),
 	url(r'^faq', faq.faq, name='faq'),
 	url(r'^sale', sale.sale, name='sale'),
+    url(r'^search', search.search, name='search'),
     url(r'^$', index.main, name='index'),
 ]

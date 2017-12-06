@@ -23,19 +23,17 @@
          Sale
     </a>
 
-    <div class="right menu">
-        <a class="item">
-       <div class="ui search">
-          <div class="ui icon input">
-            <input class="prompt" placeholder="Common passwords..." type="text">
-            <i class="search icon"></i>
-          </div>
-          <div class="results"></div>
-        </div>
-        </a>
-    </div>
+    <form action="/search" method="post">
+    {% csrf_token %}
     
+        <div class="ui right aligned action input">
+          <input class="prompt" placeholder="Search products..." type="text" name="search_term"> 
+          <button class="ui icon button">
+            <i class="search icon"></i>
+          </button>
         
+    </div>
+    </form>
 
 
     {% if IsLoggedIn %}

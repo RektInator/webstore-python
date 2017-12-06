@@ -1,0 +1,23 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load site_conf %}
+
+{% block content %}
+
+{% if matchFound %}
+<h1>Search results for "{{ search_input }}" </h1>
+<div class="ui relaxed divided animated list">
+            {% for p in foundproduct %}
+              <div class="item" onclick="window.location='/products/item/{{p.id}}';">
+                    <i class="large middle aligned icon"></i>
+                    <div class="middle aligned content">
+                        <a class="header">{{p.name}} </a>
+                    </div>
+                </div>
+            {% endfor %}
+</div>
+{% else %}
+<div class="ui suceeded message">No products found :(</div>
+{% endif %}
+
+{% endblock %}

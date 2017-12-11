@@ -123,9 +123,12 @@ def wishlist(request):
 
             if action == "remove":
                 product = models.Products.objects.filter(id=int(id))
-                entry = models.Wishlist.objects.filter(customer=customer, product=product).remove()
+                entry = models.Wishlist.objects.filter(customer=customer, product=product).delete()
 
             wishlist = models.Wishlist.objects.all().filter(customer=customer)
+
+            if action == "removeall":
+                wishlist.delete()
 
             return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
                 {
@@ -157,9 +160,12 @@ def cart(request):
 
             if action == "remove":
                 product = models.Products.objects.filter(id=int(id))
-                models.Shoppingcart.objects.filter(customer=customer, product=product).remove()
+                models.Shoppingcart.objects.filter(customer=customer, product=product).delete()
 
             cart = models.Shoppingcart.objects.all().filter(customer=customer)
+
+            if action == "removeall":
+                cart.delete()
 
             totalprice = 0
             for item in cart:

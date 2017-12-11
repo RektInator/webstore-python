@@ -9,6 +9,9 @@
           <i class="heart icon"></i>
           Wishlist
         </h4>
+        <div class="right floated content">
+            <a href="/account/wishlist/removeall/" ><i class="remove icon"></i>Remove all</a>                    
+        </div>
         {% if hasProducts %}
         <div class="ui relaxed divided list">
             {% for pr in wishlist %}
@@ -25,7 +28,7 @@
             {% endfor %}
         </div>
         {% else %}
-        <div class="ui success message">You don't have a wishlist yet!</div>
+        <div class="ui success message">You don't have any products in your wishlist!</div>
         {% endif %}
     </div>
 </div>

@@ -171,8 +171,7 @@ def cart(request):
             customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
 
             if action == "remove":
-                product = models.Products.objects.filter(id=int(id))
-                models.Shoppingcart.objects.filter(customer=customer, product=product).delete()
+                models.Shoppingcart.objects.filter(id=int(id)).delete()
 
             cart = models.Shoppingcart.objects.all().filter(customer=customer, order=None)
 

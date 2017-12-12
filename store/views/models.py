@@ -71,4 +71,4 @@ class Shoppingcart(models.Model):
     customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
     type = models.ForeignKey(ProductSize, null=True, on_delete=models.CASCADE)
-    order = models.ForeignKey(Orders, null=True, default=0, on_delete=models.CASCADE)
+    order = models.ForeignKey(Orders, null=True, default=None, on_delete=models.CASCADE)

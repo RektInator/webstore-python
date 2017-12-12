@@ -53,15 +53,15 @@ class ProductCategories(models.Model):
 
 class Orders(models.Model):
     STATUS = (
-        ("i", "In Process"),
-        ("p", "Paid"),
-        ("s", "Shipped"),
-        ("c", "Complete"),
+        ("In Process", "In Process"),
+        ("Paid", "Paid"),
+        ("Shipped", "Shipped"),
+        ("Complete", "Complete"),
     )
     customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
     date = models.DateField()
     price = models.FloatField(default=0)
-    status = models.CharField(max_length=1, choices=STATUS, default="i")
+    status = models.CharField(max_length=32, choices=STATUS, default="In Process")
 
 class Wishlist(models.Model):
     customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)

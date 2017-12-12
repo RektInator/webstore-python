@@ -15,15 +15,26 @@
         {% if hasProducts %}
         <div class="ui relaxed divided list">
             {% for pr in wishlist %}
+            
               <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
-                <i class="large middle aligned icon"></i>
-                <div class="content">
+                  
+                
+                <div class="middle aligned content">
+                    <h1> </h1>
                     <div class="ui small image">
                       <img src="{% static '/store/img/' %}{{pr.product.image.url}}">
                     </div>
                   <a class="header">{{pr.product.name}}</a>
                 </div>
-                <a href="/account/wishlist/remove/{{pr.product.id}}" >Remove</a>
+                  <div class="bottom aligned right floated content">
+                  <div class="ui vertical animated violet button" tabindex="0">
+                  <div class="hidden content">Shop</div>
+                  <div class="visible content">
+                    <i class="shop icon"></i>
+                  </div>
+                </div>
+                      <a href="/account/wishlist/remove/{{pr.product.id}}" >Remove</a>
+                </div>
               </div>
             {% endfor %}
         </div>

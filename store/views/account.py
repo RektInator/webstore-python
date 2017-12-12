@@ -80,6 +80,7 @@ def login(request):
             request.session["Email"] = account.email
             request.session["IsLoggedIn"] = True
             request.session["UID"] = account.id
+            request.session["IsAdmin"] = account.administrator
 
         except (models.Accounts.DoesNotExist):
             return renderer.RenderWithContext(request, 'store/account/login.html',

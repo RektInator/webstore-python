@@ -4,7 +4,8 @@
 {% block content %}
 <div class="ui horizontal segments">
 <div class="ui segment">
-<form class="ui form">
+<form class="ui form" action="#" method="POST">
+  {% csrf_token %}    
   <h2 class="ui dividing header">Shipping Information</h2>
   <div class="field">
     <label>Name</label>
@@ -73,8 +74,11 @@
       <div class="or"></div>
       <button class="ui button">Shipping address</button>
     </div>
-    </form>
   </div>
+  <div class="field">
+    <button class="ui big violet button" tabindex="0">Submit Order</button>      
+  </div>
+  </form>
   </div>
   </div>
   <div class="ui segment">
@@ -83,9 +87,5 @@
   </form>
   </div>
   </div>
-    <div class="ui center aligned segment">
-   <div class="ui big violet button" tabindex="0">Submit Order</div>
-   </div>
-
 
 {% endblock %}

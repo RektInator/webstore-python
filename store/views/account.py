@@ -99,14 +99,25 @@ def logout(request):
     return redirect("index")
 
 def orders(request):
-	if request.session.get("IsLoggedIn", False):
-		return renderer.RenderWithContext(request, 'store/account/orders.html', 
-			{
-				"hasOrders": False
-			}
-		)
-	else:
-		return redirect("login")
+    if request.session.get("IsLoggedIn", False):
+        # try:
+            customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+            orders = models.Orders.objects.all().filter(customer=customer)
+
+            return renderer.RenderWithContext(request, 'store/account/orders.html', 
+                {
+				    "hasProducts": True,
+                    "orders": orders
+                }
+            )
+        #except:
+        #    return renderer.RenderWithContext(request, 'store/account/orders.html', 
+        #        {
+        #            "hasProducts": False
+        #        }
+        #    )
+    else:
+        return redirect("login")
 
 def wishlist(request):
     if request.session.get("IsLoggedIn", False):
@@ -163,14 +174,14 @@ def cart(request):
                 product = models.Products.objects.filter(id=int(id))
                 models.Shoppingcart.objects.filter(customer=customer, product=product).delete()
 
-            cart = models.Shoppingcart.objects.all().filter(customer=customer)
+            cart = models.Shoppingcart.objects.all().filter(customer=customer, order=None)
 
             if action == "removeall":
                 cart.delete()
 
             totalprice = 0
             for item in cart:
-                totalprice += int(item.type.price)
+                totalprice += float(item.type.price)
 
             return renderer.RenderWithContext(request, 'store/account/cart.html', 
                 {

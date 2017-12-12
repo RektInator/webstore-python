@@ -41,6 +41,12 @@
         Welcome, {{ Fullname }}
         <i class="dropdown icon"></i>
         <div class="menu">
+            {% if IsAdmin %}
+            <div class="item" onclick="window.location='/admin';">
+                <i class="configure icon"></i>                  
+                Admin panel
+            </div>
+            {% endif %}
             <div class="item" onclick="window.location='/account/cart';">
                 <i class="shop icon"></i>                  
                 Shopping cart

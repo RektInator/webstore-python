@@ -3,12 +3,28 @@
 
 {% block content %}
 <div class="ui middle aligned center aligned grid">
-    <div class="twelve wide column">
-        {% if hasOrders %}
-        
-        {% else %}
-        <div class="ui success message">You don't have any orders yet!</div>
-        {% endif %}
+        <div class="twelve wide column">
+            <h4 class="ui horizontal divider header">
+              <i class="cart icon"></i>
+              Orders
+            </h4>
+            {% if hasProducts %}
+            <div class="ui middle aligned divided list">
+                {% for pr in orders %}
+                    <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
+                        <i class="large middle aligned icon"></i>
+                        <div class="content">
+                            <a class="header">Order #{{pr.id}}</a>
+                        </div>
+                        <div class="center floated content">
+                          <div class="header"> &euro; {{pr.price}}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="ui success message">You haven't placed any orders yet!</div>
+            {% endif %}
+        </div>
     </div>
-</div>
 {% endblock %}

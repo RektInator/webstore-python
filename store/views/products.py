@@ -21,7 +21,6 @@ def item(request):
         error = False
         errorMessage = ""
         productRemoved = False
-        edit = False
 
         if request.method == 'POST':
 
@@ -44,24 +43,13 @@ def item(request):
                 productAdded = True
             elif action == "shoppingcart":
                 if productSize != "":
-                    item = models.Shoppingcart(customer=customer, product=product, type=models.ProductSize.objects.get(id=int(productSize)))
+                    item = models.Shoppingcart(customer=customer, product=product, type=models.ProductSize.objects.get(id=int(productSize)), order=None)
                     item.save()
                     productAdded = True
                 else:
                     error = True
                     productAdded = False
                     errorMessage = "You must choose a product size."
-            elif action == "edit":
-                edit = False
-                if len(request.POST.get("name", "")) > 0:
-                    product.name = request.POST.get("name", product.name)
-                if len(request.POST.get("desc", "")) > 0:
-                    product.description = request.POST.get("desc", product.description)
-                product.save()
-
-        else:
-            if action == "edit":
-                edit = True
                 
         return renderer.RenderWithContext(request, 'store/products/item.html', {
             "product": product,
@@ -71,8 +59,7 @@ def item(request):
             "error": error,
             "errorMessage": errorMessage,
             "productFound": True,
-            "removed": productRemoved,
-            "edit": edit,
+            "removed": productRemoved
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/item.html', {

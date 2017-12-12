@@ -10,6 +10,7 @@ from .views import sale
 from .views import terms
 from .views import search
 from .views import payment
+from .views import admin
 
 urlpatterns = [
     # account endpoints
@@ -21,6 +22,9 @@ urlpatterns = [
 	url(r'^account/cart', account.cart, name='cart'),
     url(r'^account/', account.overview, name='overview'),
     
+    # admin endpoints
+    url(r'^admin/', admin.index, name='admin'),
+
     # storage endpoints
     url(r'^storage/image', storage.image, name='image'),
 

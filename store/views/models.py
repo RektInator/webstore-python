@@ -53,9 +53,8 @@ class ProductCategories(models.Model):
 
 class Orders(models.Model):
     customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
-    product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
     date = models.DateField()
-    amount = models.IntegerField()
+    price = models.FloatField(default=0)
 
 class Wishlist(models.Model):
     customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
@@ -65,3 +64,4 @@ class Shoppingcart(models.Model):
     customer = models.ForeignKey(Accounts, null=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, null=True, on_delete=models.CASCADE)
     type = models.ForeignKey(ProductSize, null=True, on_delete=models.CASCADE)
+    order = models.ForeignKey(Orders, null=True, default=0, on_delete=models.CASCADE)

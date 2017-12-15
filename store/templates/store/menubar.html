@@ -23,53 +23,59 @@
          Sale
     </a>
 
-    <form action="/search" method="post">
+    <form action="/search" method="post" class="ui item">
     {% csrf_token %}
     
-        <div class="ui right aligned action input">
-          <input class="prompt" placeholder="Search products..." type="text" name="search_term"> 
-          <button class="ui icon button">
-            <i class="search icon"></i>
-          </button>
-        
-    </div>
+        <div class="ui action input">
+            <input class="prompt" placeholder="Search products..." type="text" name="search_term"> 
+            <button class="ui icon button">
+                <i class="search icon"></i>
+            </button>
+        </div>
+
     </form>
 
 
     {% if IsLoggedIn %}
-    <a href="#" class="ui right floated dropdown item">
-        Welcome, {{ Fullname }}
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            {% if IsAdmin %}
-            <div class="item" onclick="window.location='/admin';">
-                <i class="configure icon"></i>                  
-                Admin panel
+    <div class="right menu">
+        <a class="item" onclick="window.location='/account/cart';">
+            <i class="shop icon"></i>                  
+            {{ ShoppingCartItems }}
+        </a>
+        <a href="#" class="ui right floated dropdown item">
+            Welcome, {{ Fullname }}
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                {% if IsAdmin %}
+                <div class="item" onclick="window.location='/admin';">
+                    <i class="configure icon"></i>                  
+                    Admin panel
+                </div>
+                {% endif %}
+                <div class="item" onclick="window.location='/account/cart';">
+                    <i class="shop icon"></i>                  
+                    Shopping cart
+                </div>
+                <div class="item" onclick="window.location='/account/overview';">
+                    <i class="user icon"></i>
+                    Account overview
+                </div>
+                <div class="item" onclick="window.location='/account/orders';">
+                    <i class="payment icon"></i>                         
+                    My orders
+                </div>
+                <div class="item" onclick="window.location='/account/wishlist';">
+                    <i class="heart icon"></i>                         
+                    My wishlist
+                </div>
+                <div class="item" onclick="window.location='/account/logout';">
+                    <i class="sign out icon"></i> 
+                    Logout
+                </div>
+                
             </div>
-            {% endif %}
-            <div class="item" onclick="window.location='/account/cart';">
-                <i class="shop icon"></i>                  
-                Shopping cart
-            </div>
-            <div class="item" onclick="window.location='/account/overview';">
-                <i class="user icon"></i>
-                Account overview
-            </div>
-            <div class="item" onclick="window.location='/account/orders';">
-                <i class="payment icon"></i>                         
-                My orders
-            </div>
-            <div class="item" onclick="window.location='/account/wishlist';">
-                <i class="heart icon"></i>                         
-                My wishlist
-            </div>
-            <div class="item" onclick="window.location='/account/logout';">
-                <i class="sign out icon"></i> 
-                Logout
-            </div>
-            
-        </div>
-    </a>
+        </a>
+    </div>
  
     {% else %}
     <div class="right menu">

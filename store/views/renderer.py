@@ -11,4 +11,9 @@ def RenderWithContext(request, page, context = {}):
     context["IsAdmin"] = request.session.get("IsAdmin", False)
     context["categories"] = models.Category.objects.all()
 
+    if context["IsLoggedIn"]:
+        customer = models.Accounts.objects.get(id=int(request.session.get("UID", 0)))
+        cart = models.Shoppingcart.objects.all().filter(customer=customer, order=None)
+        context["ShoppingCartItems"] = cart.count()
+
     return render(request, page, context)

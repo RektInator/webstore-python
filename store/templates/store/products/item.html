@@ -20,6 +20,11 @@
 {% endif %}
 <div class="ui segment">
     {% if edit %}
+    <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="myfile" />
+            <input type="submit" name="submit" value="Upload" />
+        </form>
     <form action="/products/item/{{product.id}}/edit" method="post" class="ui form">
     {% csrf_token %}        
     {% endif %}
@@ -85,6 +90,11 @@
     </div>
 
     {% if edit %}
+
+
+        
+
+
     <button class="ui {% PRIMARY_COLOR %} button" type="submit">Save</button>
     <button class="ui button">Cancel</button>        
     </form>

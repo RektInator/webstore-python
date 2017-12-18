@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 
 def item(request):
 
-    try:
+    #try:
         requestPath = request.path.split("/")
         action = ""
 
@@ -22,6 +22,7 @@ def item(request):
         errorMessage = ""
         productRemoved = False
         edit = False
+        image = models.Image.objects.all()
 
         if request.method == 'POST':
 
@@ -57,14 +58,19 @@ def item(request):
                     product.name = request.POST.get("name", product.name)
                 if len(request.POST.get("desc", "")) > 0:
                     product.description = request.POST.get("desc", product.description)
-                product.save()
+                
+                product.image.url = request.FILES['myfile'].name
 
+                product.image.save()
+                product.save()
+              
         else:
             if action == "edit":
                 edit = True
                 
         return renderer.RenderWithContext(request, 'store/products/item.html', {
             "product": product,
+            "image": image,
             "added": productAdded,
             "addedTo": action,
             "size": models.ProductSize.objects.all(),
@@ -74,10 +80,10 @@ def item(request):
             "removed": productRemoved,
             "edit": edit,
         })
-    except:
-        return renderer.RenderWithContext(request, 'store/products/item.html', {
-            "productFound": False
-        })
+    #except:
+     #   return renderer.RenderWithContext(request, 'store/products/item.html', {
+      #      "productFound": False
+       # })
 
 def queryProducts(request,productcat):
     try:

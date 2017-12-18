@@ -26,7 +26,7 @@ class Accounts(models.Model):
 class Image(models.Model):
     caption = models.CharField(max_length=64, blank=True)
     # blob = models.BinaryField(max_length=16777216)
-    url = models.URLField()
+    url = models.ImageField(unique=True)
 
 class Products(models.Model):
     name = models.CharField(max_length=256)

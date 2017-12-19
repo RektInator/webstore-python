@@ -5,6 +5,11 @@ from django.template.context import RequestContext
 from . import renderer
 from . import models
 from django.shortcuts import redirect
+import os
+import string
+import random
+def id_generator(size=24, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 def item(request):
 
@@ -59,11 +64,22 @@ def item(request):
                 if len(request.POST.get("desc", "")) > 0:
                     product.description = request.POST.get("desc", product.description)
                 
-                product.image.url = request.FILES['myfile'].name
-
-                product.image.save()
                 product.save()
-              
+            elif action == "editimage":
+                f = request.FILES['myfile']
+                filename, file_extension = os.path.splitext(f.name)
+                imagename = id_generator() + file_extension
+                image = models.Image(url=imagename, caption=product.name)
+                image.save()
+
+                with open('static/store/img/' + imagename, 'wb+') as destination:
+                    for chunk in f.chunks():
+                        destination.write(chunk)
+
+                product.image = image
+                product.save()
+            
+                edit = True
         else:
             if action == "edit":
                 edit = True

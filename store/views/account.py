@@ -142,9 +142,20 @@ def wishlist(request):
             if action == "removeall":
                 wishlist.delete()
 
+            if action == "shoppingcart":
+                if productSize != "":
+                    item = models.Shoppingcart(customer=customer, product=product, type=models.ProductSize.objects.get(id=int(productSize)))
+                    item.save()
+                    productAdded = True
+                else:
+                    error = True
+                    productAdded = False
+                    errorMessage = "You must choose a product size."
+
             return renderer.RenderWithContext(request, 'store/account/wishlist.html', 
                 {
 				    "hasProducts": True,
+                    "size": models.ProductSize.objects.all(),
                     "wishlist": wishlist
                 }
             )

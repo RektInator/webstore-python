@@ -10,7 +10,7 @@
           Wishlist
         </h4>
         <div class="right floated content">
-            <a href="/account/wishlist/removeall/" ><i class="remove icon"></i>Remove all</a>                    
+            <a href="/account/wishlist/removeall/" ><i class="circular remove black icon"></i>Remove all</a>                    
         </div>
         {% if hasProducts %}
         <div class="ui relaxed divided list">
@@ -27,15 +27,52 @@
                   <a class="header">{{pr.product.name}}</a>
                 </div>
                   <div class="bottom aligned right floated content">
-                  <div class="ui vertical animated violet button" tabindex="0">
+                  <div class="ui vertical animated violet button" button onclick= $('.ui.modal').modal('show');>
                   <div class="hidden content">Shop</div>
                   <div class="visible content">
                     <i class="shop icon"></i>
                   </div>
                 </div>
-                      <a href="/account/wishlist/remove/{{pr.product.id}}" >Remove</a>
+                      <a href="/account/wishlist/remove/{{pr.product.id}}" ><i class="circular remove black icon"></i>Remove</a>
                 </div>
               </div>
+
+        <script>
+        $('.ui.modal').modal('hide');
+        </script>
+        <div class="ui modal">
+            <div class="ui violet button" button onclick= $('.ui.modal').modal('hide');>
+            <i class="close icon"></i>
+            </div>
+          <div class="header">
+            Order Product
+          </div>
+          <div class="image content">
+            <div class="image">
+              <div class="ui small image">
+                 <img src="{% static '/store/img/' %}{{pr.product.image.url}}">
+              </div>
+                 <a class="header">{{pr.product.name}}</a>
+            </div>
+            <div class="description">
+              <form action="/products/item/{{product.id}}/shoppingcart" method="post">
+                {% csrf_token %}       
+                <select class="ui dropdown" name="size">
+                    <option value="">Size</option>
+                    {% for s in size %}
+                    <option value="{{s.id}}">&euro;{{s.price}} {{s.name}} ({{s.width}} x {{s.height}} cm)</option>
+                    {% endfor %}
+                </select>
+                <button class="ui {% PRIMARY_COLOR %} button">
+                    <i class="cart icon"></i>Add to cart
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="actions">
+            <div class="ui red button" button onclick= $('.ui.modal').modal('hide');>Cancel</div>
+          </div>
+        </div>
             {% endfor %}
         </div>
         {% else %}

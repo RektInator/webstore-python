@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import path
 
 from .views import index
 from .views import account
@@ -23,7 +24,9 @@ urlpatterns = [
     url(r'^account/', account.overview, name='overview'),
     
     # admin endpoints
-    url(r'^admin/', admin.index, name='admin'),
+    path('admin/user/<int:id>/remove/', admin.remove, name='removeuser'),
+    path('admin/user/<int:id>/', admin.user, name='admin'),
+    path('admin/', admin.index, name='admin'),
 
     # storage endpoints
     url(r'^storage/image', storage.image, name='image'),

@@ -1,0 +1,42 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+<div class="ui main container" style="padding-top: 50px">
+    <h2 class="ui top attached header">
+        {{user.fullname}}
+    </h2>
+    <div class="ui blue attached segment">
+        <form action="#" method="post" class="ui form">
+            {% csrf_token %}
+            <div class="field">
+                <label>Name</label>
+                <input name="name" placeholder="Fullname" type="text" value="{{user.fullname}}">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input name="email" placeholder="Email address" type="text" value="{{user.email}}">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input name="password" placeholder="Password" type="text" value="">
+            </div>
+            <div class="field">
+                <label>Administrator</label>            
+            </div>
+
+            <div class="field">                    
+                <div class="ui checkbox">
+                    <input 
+                    {% if user.administrator %}
+                    checked="on" 
+                    {% endif %}
+                    name="admin" type="checkbox">
+                    <label>Administrator</label>
+                </div>
+            </div>
+
+            <button class="ui green button" type="submit">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

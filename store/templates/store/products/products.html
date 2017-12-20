@@ -9,14 +9,19 @@
 <div class="ui link cards">
     {% for pr in products %}
     <div class="card" onclick="window.location='/products/item/{{pr.product.id}}';">
-        <div class="image" style="size:auth;">
+        <div class="ui image" style="size:auth;">
             <img src="{% static 'store/img/' %}{{pr.product.image.url}}">
         </div>
         <div class="content">
+            {% if IsAdmin %}
+            <a href="/products/item/{{pr.product.id}}/remove" ><i class="circular remove red icon"></i></a> 
+            {% endif %}
             <a class="header">{{ pr.product.name }}</a>
+           
             <div class="description">
                 {{ pr.product.description }}
             </div>
+             
         </div>
     </div>
     {% endfor %}

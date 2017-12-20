@@ -53,7 +53,7 @@
                  <a class="header">{{pr.product.name}}</a>
             </div>
             <div class="description">
-              <form action="/products/item/{{product.id}}/shoppingcart" method="post">
+              <form action="/products/item/{{pr.product.id}}/shoppingcart" method="post">
                 {% csrf_token %}       
                 <select class="ui dropdown" name="size">
                     <option value="">Size</option>

@@ -8,8 +8,20 @@ from django.shortcuts import redirect
 import os
 import string
 import random
+
 def id_generator(size=24, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+def remove(request, id):
+    try:
+        # remove product
+        product = models.Products.objects.get(id=id)
+        product.delete()
+
+        return redirect("products")
+
+    except:
+        return redirect("products")
 
 def item(request):
 

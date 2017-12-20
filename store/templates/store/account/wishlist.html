@@ -25,7 +25,7 @@
                   <a class="header" href="/products/item/{{pr.product.id}}">{{pr.product.name}}</a>
                 </div>
                   <div class="bottom aligned right floated content">
-                  <div class="ui vertical animated violet button" button onclick= $('.ui.modal').modal('show');>
+                  <div class="ui vertical animated violet button" button onclick= $('.ui.modal.{{pr.product.id}}').modal('show');>
                   <div class="hidden content">Shop</div>
                   <div class="visible content">
                     <i class="shop icon"></i>
@@ -36,10 +36,10 @@
               </div>
 
         <script>
-        $('.ui.modal').modal('hide');
+        $('.ui.modal.{{pr.product.id}}').modal('hide');
         </script>
-        <div class="ui modal">
-            <div class="ui violet button" button onclick= $('.ui.modal').modal('hide');>
+        <div class="ui modal {{pr.product.id}}">
+            <div class="ui violet button" button onclick= $('.ui.modal.{{pr.product.id}}').modal('hide');>
             <i class="close icon"></i>
             </div>
           <div class="header">
@@ -68,7 +68,7 @@
             </div>
           </div>
           <div class="actions">
-            <div class="ui red button" button onclick= $('.ui.modal').modal('hide');>Cancel</div>
+            <div class="ui red button" button onclick= $('.ui.modal.{{pr.product.id}}').modal('hide');>Cancel</div>
           </div>
         </div>
             {% endfor %}

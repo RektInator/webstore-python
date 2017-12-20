@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^storage/image', storage.image, name='image'),
 
     # products
+    path('products/item/<int:id>/remove', products.remove, name='removeproduct'),
     url(r'^products/item', products.item, name='item'),
     url(r'^products/', products.index, name='products'),
 

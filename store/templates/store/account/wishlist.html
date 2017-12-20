@@ -16,15 +16,13 @@
         <div class="ui relaxed divided list">
             {% for pr in wishlist %}
             
-              <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
-                  
-                
+              <div class="item">
                 <div class="middle aligned content">
                     <h1> </h1>
                     <div class="ui small image">
                       <img src="{% static '/store/img/' %}{{pr.product.image.url}}">
                     </div>
-                  <a class="header">{{pr.product.name}}</a>
+                  <a class="header" href="/products/item/{{pr.product.id}}">{{pr.product.name}}</a>
                 </div>
                   <div class="bottom aligned right floated content">
                   <div class="ui vertical animated violet button" button onclick= $('.ui.modal').modal('show');>

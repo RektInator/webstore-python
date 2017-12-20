@@ -27,9 +27,9 @@
             <div class="field">                    
                 <div class="ui checkbox">
                     <input 
-                    {% if user.administrator %}
-                    checked="on" 
-                    {% endif %}
+                    {% if user.administrator == 1 %}                    
+                    checked="on"
+                    {% endif %} 
                     name="admin" type="checkbox">
                     <label>Administrator</label>
                 </div>

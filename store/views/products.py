@@ -123,7 +123,8 @@ def queryProducts(request,productcat):
             )
 
         return renderer.RenderWithContext(request, 'store/products/products.html', {
-            "products": products
+            "products": products,
+            "filters": models.Filters.objects.all()
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/products.html', {

@@ -6,6 +6,20 @@
 {% if error %}
 <div class="ui error message">Category not found.</div>
 {% else %}
+<div class="ui attached segment" style="margin-bottom:10px; margin-top: -20px">
+    <form class="ui form" style="margin-bottom:-5px">
+        {% for fi in filters %}
+        <div class="field">
+            <div class="ui checkbox">
+                <input name="{{fi.name}}" type="checkbox">
+                <label>{{fi.name}}</label>
+            </div>
+        </div>
+        {% endfor %}
+
+        <button class="ui green button" type="submit">Apply</button>
+    </form>
+</div>
 <div class="ui link cards">
     {% for pr in products %}
     <div class="card" onclick="window.location='/products/item/{{pr.product.id}}';">

@@ -23,6 +23,54 @@ def remove(request, id):
     except:
         return redirect("products")
 
+
+def addimage(request):
+    f = request.FILES.get('myfile', 0)
+
+    if f != 0:
+        filename, file_extension = os.path.splitext(f.name)
+        imagename = id_generator() + file_extension
+        image = models.Image(url=imagename, caption=imagename)
+        image.save()
+
+        with open('static/store/img/' + imagename, 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+        return image
+
+    return 0
+
+def add(request):
+    action = ""
+    if request.method == 'POST':
+        name = request.POST.get("name", "")
+        description = request.POST.get("description", "")
+        
+        #if len(request.POST.get("name", "")) > 0:
+         #   product.name = request.POST.get("name", product.name)
+        #if len(request.POST.get("description", "")) > 0:
+        #    product.description = request.POST.get("Description", product.description)
+        
+       
+        
+        #request.session["Name"] = product.name
+        #request.session["Description"] = product.description
+
+        image = addimage(request)
+        product = models.Products(name=name, description=description)
+
+        if image != 0:
+            product.image = image
+
+        product.save()
+
+        #product.save()
+        return renderer.RenderWithContext(request, 'store/products/addproduct.html')
+            
+    else:
+       return renderer.RenderWithContext(request, 'store/products/addproduct.html') 
+
+
 def item(request):
 
     #try:

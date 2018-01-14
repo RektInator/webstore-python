@@ -1,0 +1,29 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% load site_conf %}
+
+{% block content %}
+<div class="ui segment">
+    <form action="/products/item/addproduct/addimage" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile" />
+        <input type="submit" name="submit" value="Upload" />
+    </form>
+    <form action="/products/item/addproduct/" method="post" class="ui form">
+    {% csrf_token %}   
+
+        <div class="field">
+        <label>Name</label>
+        <input name="name" placeholder="Enter name" type="text">
+    </div>
+        <div class="field">
+                <label>Description</label>
+                <input name="description" placeholder="Enter a description" type="text">
+            </div>
+
+         <button class="ui {% PRIMARY_COLOR %} button" type="submit">Save</button>
+    <button class="ui button">Cancel</button>        
+    </form>
+
+</div>
+{% endblock %}

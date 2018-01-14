@@ -33,6 +33,8 @@ urlpatterns = [
 
     # products
     path('products/item/<int:id>/remove', products.remove, name='removeproduct'),
+    path('products/item/addproduct/addimage', products.addimage, name='addimage'),
+    path('products/item/addproduct', products.add, name='addproduct'),
     url(r'^products/item', products.item, name='item'),
     url(r'^products/', products.index, name='products'),
 

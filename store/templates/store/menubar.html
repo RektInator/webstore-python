@@ -5,16 +5,8 @@
     <a href="/" class="header item">
         <img class="logo" src="{% static 'store/logo.png' %}">
     </a>
-    <a href="/products/#" class="ui floated dropdown item">
+    <a href="/products" class="item">
         Products 
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            {% for cat in categories %}
-            <div class="item" onclick="window.location='/products/{{ cat.url }}';">
-                {{ cat.name }}
-            </div>
-            {% endfor %}
-        </div>
     </a>
     <a href="/contact" class="item">
         Contact

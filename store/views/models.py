@@ -32,14 +32,6 @@ class Products(models.Model):
     description = models.CharField(max_length=512)
     image = models.ForeignKey(Image, null=True, on_delete=models.CASCADE)
 
-class Filters(models.Model):
-    name = models.CharField(max_length=128)
-    type = models.CharField(max_length=128)
-
-class ProductFilters(models.Model):
-    product = models.ForeignKey(Products, on_delete=models.CASCADE)
-    filter = models.ForeignKey(Filters, on_delete=models.CASCADE)
-
 class ProductSize(models.Model):
     width = models.FloatField(default=0)
     height = models.FloatField(default=0)

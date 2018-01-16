@@ -41,7 +41,8 @@ def addimage(request):
     return 0
 
 def add(request):
-    categories = models.ProductCategories.objects.all()
+    categories = models.Category.objects.all()
+    filters = models.Filters.objects.all()
 
     if request.method == 'POST':
         name = request.POST.get("name", "")
@@ -56,17 +57,18 @@ def add(request):
         product.save()
 
         for cat in categories:
-            checked = request.POST.get(cat.category.name, "")
+            checked = request.POST.get(cat.name, "")
 
             if checked != "":
-                pcat = models.ProductCategories(product=product, category=models.Category.objects.get(id=cat.id))
+                pcat = models.ProductCategories(product=product, category=cat)
                 pcat.save()
 
         return redirect("products")
             
     else:
         return renderer.RenderWithContext(request, 'store/products/addproduct.html', {
-            "categories": categories
+            "categories": categories,
+            "filters": filters
         }) 
 
 
@@ -160,18 +162,21 @@ def item(request):
       #      "productFound": False
        # })
 
-def queryProducts(request,productcat):
+def queryProducts(request):
     try:
         products = models.ProductCategories.objects.all()
-    
-        if productcat != "all":
-            products = products.filter(
-                category=models.Category.objects.get(url=productcat)
-            )
+        category = models.Category.objects.all()
+
+        if request.GET.get("filter", "") == "true":
+            for cat in category:
+                checked = request.GET.get(cat.name, "")
+
+                if checked == "":
+                    products = products.exclude(category=cat)
 
         return renderer.RenderWithContext(request, 'store/products/products.html', {
             "products": products,
-            "filters": models.Filters.objects.all()
+            "filters": category
         })
     except:
         return renderer.RenderWithContext(request, 'store/products/products.html', {
@@ -179,7 +184,4 @@ def queryProducts(request,productcat):
         })
 
 def index(request):
-    if len(request.path) <= 10:
-        return queryProducts(request, "all")
-    else:
-        return queryProducts(request, request.path[10:])
+    return queryProducts(request)

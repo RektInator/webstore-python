@@ -22,7 +22,7 @@
 </div>
 <div class="ui link cards">
     {% if IsAdmin %}
-     <form action="/products/item/addproduct" method="post">
+     <form action="/products/item/addproduct" method="get">
         {% csrf_token %}
     <button class="ui icon button">
       <i class="plus icon"></i>

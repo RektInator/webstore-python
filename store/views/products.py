@@ -41,20 +41,9 @@ def addimage(request):
     return 0
 
 def add(request):
-    action = ""
     if request.method == 'POST':
         name = request.POST.get("name", "")
         description = request.POST.get("description", "")
-        
-        #if len(request.POST.get("name", "")) > 0:
-         #   product.name = request.POST.get("name", product.name)
-        #if len(request.POST.get("description", "")) > 0:
-        #    product.description = request.POST.get("Description", product.description)
-        
-       
-        
-        #request.session["Name"] = product.name
-        #request.session["Description"] = product.description
 
         image = addimage(request)
         product = models.Products(name=name, description=description)
@@ -63,12 +52,10 @@ def add(request):
             product.image = image
 
         product.save()
-
-        #product.save()
-        return renderer.RenderWithContext(request, 'store/products/addproduct.html')
+        return redirect("products")
             
     else:
-       return renderer.RenderWithContext(request, 'store/products/addproduct.html') 
+        return renderer.RenderWithContext(request, 'store/products/addproduct.html') 
 
 
 def item(request):

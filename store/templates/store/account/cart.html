@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="ui middle aligned center aligned grid">
-    <div class="twelve wide column">
+    <table class="twelve wide column">
         <h4 class="ui horizontal divider header">
           <i class="cart icon"></i>
           Shoppingcart
@@ -12,38 +12,56 @@
             <a href="/account/cart/removeall/" ><i class="remove icon"></i>Remove all</a>                    
         </div>
         {% if hasProducts %}
-        <div class="ui middle aligned divided list">
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>
+                            Product
+                        </th>
+                        <th>
+                            Size
+                        </th>
+                        <th>
+                            Price
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
             {% for pr in cart %}
-                <div class="item" onclick="window.location='/products/item/{{pr.product.id}}';">
-                    <i class="large middle aligned icon"></i>
-                    <div class="content">
-                        <a class="header">{{pr.product.name}} </a>
-                        <div class="description">{{pr.type.name}} ({{pr.type.width}} x {{pr.type.height}} cm)</div>
-                    </div>
-                    <div class="center floated content">
-                      <div class="header"> &euro; {{pr.type.price}}</div>
-                    </div>
-                    <div class="right floated content">
-                    <a href="/account/cart/remove/{{pr.id}}" ><i class="remove icon"></i>Remove</a>                    
-                    </div>
-                </div>
+                <tr>
+                    <td>
+                        {{pr.product.name}}
+                    </td>
+                    <td>
+                        {{pr.type.width}} x {{pr.type.height}} cm
+                    </td>
+                    <td>
+                        &euro; {{pr.type.price}}
+                    </td>
+                    <td>
+                        <a href="/account/cart/remove/{{pr.id}}" ><i class="remove icon"></i>Remove</a>                    
+                    </td>
+                </tr>
             {% endfor %}
-            <div class="ui divider"></div>
+        </table>
 
-            <div class="content">
-                        <a class="header"> Total: </a>
-                    </div>
-            <div class="right floated content">
-                  <div class="header"> &euro;{{ totalprice }}</div>
-            </div>
+        <div class="ui divider"></div>
 
-            <form action="/payment" method="get">
-                {% csrf_token %}
-                <button class="ui {% PRIMARY_COLOR %} button">
-                    Order Products
-                </button>
-            </form>
+        <div class="content">
+            <a class="header"> Total: </a>
         </div>
+        <div class="right floated content">
+            <div class="header"> &euro;{{ totalprice }}</div>
+        </div>
+
+        <form action="/payment" method="get">
+            {% csrf_token %}
+            <button class="ui {% PRIMARY_COLOR %} button">
+                Order Products
+            </button>
+        </form>
         {% else %}
         <div class="ui success message">You don't have any items in your shoppingcart yet!</div>
         {% endif %}

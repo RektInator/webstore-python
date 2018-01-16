@@ -42,7 +42,6 @@ def addimage(request):
 
 def add(request):
     categories = models.Category.objects.all()
-    filters = models.Filters.objects.all()
 
     if request.method == 'POST':
         name = request.POST.get("name", "")
@@ -68,7 +67,6 @@ def add(request):
     else:
         return renderer.RenderWithContext(request, 'store/products/addproduct.html', {
             "categories": categories,
-            "filters": filters
         }) 
 
 

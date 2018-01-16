@@ -12,7 +12,11 @@ def remove(request, id):
     try:
         user = models.Accounts.objects.get(id=id)
         user.delete()
-        
+
+        if id == request.session.get("UID", 0):
+            request.session.clear()
+            return redirect("login")
+
         return redirect("admin")
     except:
         return redirect("admin")

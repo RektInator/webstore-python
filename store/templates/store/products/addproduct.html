@@ -16,6 +16,16 @@
             <input name="description" placeholder="Enter a description" type="text">
         </div>
 
+        <h4 class="ui dividing header">Categories</h4>
+        {% for cat in categories %}
+        <div class="field">
+            <div class="ui checkbox">
+                <input name="{{cat.name}}" type="checkbox">
+                <label>{{cat.name}}</label>
+            </div>
+        </div>
+        {% endfor %}
+
         <button class="ui {% PRIMARY_COLOR %} button" type="submit">Save</button>
         <button class="ui button">Cancel</button>        
     </form>

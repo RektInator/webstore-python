@@ -41,6 +41,8 @@ def addimage(request):
     return 0
 
 def add(request):
+    categories = models.ProductCategories.objects.all()
+
     if request.method == 'POST':
         name = request.POST.get("name", "")
         description = request.POST.get("description", "")
@@ -52,10 +54,20 @@ def add(request):
             product.image = image
 
         product.save()
+
+        for cat in categories:
+            checked = request.POST.get(cat.category.name, "")
+
+            if checked != "":
+                pcat = models.ProductCategories(product=product, category=models.Category.objects.get(id=cat.id))
+                pcat.save()
+
         return redirect("products")
             
     else:
-        return renderer.RenderWithContext(request, 'store/products/addproduct.html') 
+        return renderer.RenderWithContext(request, 'store/products/addproduct.html', {
+            "categories": categories
+        }) 
 
 
 def item(request):

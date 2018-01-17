@@ -16,7 +16,7 @@ def search(request):
 
             foundproduct = []
             for p in products:
-                if (search_input in p.name.lower()) | (search_input in p.name.upper()) :
+                if (search_input.lower() in p.name.lower()) :
                     matchFound = True
                     foundproduct.append(p)
             
